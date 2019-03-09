@@ -19,7 +19,7 @@ class MethodTransformVisitor extends MethodVisitor implements Opcodes {
     	this.line = line;
     	if(line != 0) {
         	mv.visitLdcInsn(className + ":" + line);
-        	mv.visitMethodInsn(INVOKESTATIC, "com/utd/cs6367/HashStorage", "addToHashSet", "(Ljava/lang/String;)V", false);
+        	mv.visitMethodInsn(INVOKESTATIC, "com/utd/cs6367/CoverageStorage", "addToCovLst", "(Ljava/lang/String;)V", false);
     	}
     	super.visitLineNumber(line, start);
     }
@@ -29,7 +29,7 @@ class MethodTransformVisitor extends MethodVisitor implements Opcodes {
     public void visitLabel(Label label){
     	if(line != 0) {
     		mv.visitLdcInsn(className + ":" + line);
-        	mv.visitMethodInsn(INVOKESTATIC, "com/utd/cs6367/HashStorage", "addToHashSet", "(Ljava/lang/String;)V", false);
+        	mv.visitMethodInsn(INVOKESTATIC, "com/utd/cs6367/CoverageStorage", "addToCovLst", "(Ljava/lang/String;)V", false);
     	}
     	super.visitLabel(label);
     }
