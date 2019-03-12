@@ -8,18 +8,28 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 
 public class Agent {
-	public static void premain(String agentArgs, Instrumentation inst) {
-		inst.addTransformer(new ClassFileTransformer() {
-            public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException {
-                if (className.contains("org/apache/commons/dbutils")) {
-                    ClassReader cr = new ClassReader(classfileBuffer);
+	public static void premain(String agentArgs, Instrumentation instrumentation) {
+		instrumentation.addTransformer(new ClassFileTransformer() {
+            public byte[] transform(ClassLoader classLoader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classFileBuffer) throws IllegalClassFormatException {
+                if (className.contains("org/apache/commons/dbutils")
+                		|| className.contains("com/skype")
+                		|| className.contains("org/ahocorasick")
+                		|| className.contains("ru/yandex/qatools")
+                		|| className.contains("com/github/vbauer/caesar")
+                		|| className.contains("org/apache/commons/imaging")
+                		|| className.contains("org/apache/commons/io")
+                		|| className.contains("org/trendafilov/confucius")
+                		|| className.contains("org/ebaysf/web/cors")
+                		|| className.contains("eu/danieldk/dictomaton")
+                		|| className.contains("net/objecthunter/exp4j")) {
+                    ClassReader cr = new ClassReader(classFileBuffer);
                     ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_FRAMES);
-                    ClassTransformVisitor ctv = new ClassTransformVisitor(cw, className);
-                    cr.accept(ctv, 0);
+                    ClassTransformVisitor classTransformVisitor = new ClassTransformVisitor(cw, className);
+                    cr.accept(classTransformVisitor, 0);
                     return cw.toByteArray();
                 }
 
-                return classfileBuffer;
+                return classFileBuffer;
             }
         });
 	}

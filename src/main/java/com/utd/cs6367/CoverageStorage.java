@@ -3,15 +3,15 @@ package com.utd.cs6367;
 import java.util.HashSet;
 
 public class CoverageStorage {
-	private static HashSet<String> covLst = new HashSet<String>();
+	private static HashSet<String> coverageList = new HashSet<String>();
 	
 	private CoverageStorage() {}
 	
-    public static HashSet<String> getCovLst() {
-        return covLst;
+    public static HashSet<String> getCoverageList() {
+        return coverageList;
     }
     
-    public static void addToCovLst(String stringToAdd) {
-    	covLst.add(stringToAdd);
+    public static void addToCoverageList(String stringToAdd) {
+    	coverageList.add(stringToAdd);
     }
 }

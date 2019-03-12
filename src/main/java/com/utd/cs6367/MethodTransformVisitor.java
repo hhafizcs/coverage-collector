@@ -6,31 +6,32 @@ import org.objectweb.asm.Opcodes;
 
 class MethodTransformVisitor extends MethodVisitor implements Opcodes {
 	String className;
-	int line;
+	int lineNumber;
 	
     public MethodTransformVisitor(final MethodVisitor mv, String className) {
         super(ASM7, mv);
         this.className = className;
     }
 
-    // statement coverage collection
     @Override
     public void visitLineNumber(int line, Label start){
-    	this.line = line;
-    	if(line != 0) {
-        	mv.visitLdcInsn(className + ":" + line);
-        	mv.visitMethodInsn(INVOKESTATIC, "com/utd/cs6367/CoverageStorage", "addToCovLst", "(Ljava/lang/String;)V", false);
+    	lineNumber = line;
+    	
+    	if(lineNumber != 0) {
+        	mv.visitLdcInsn(className + ":" + lineNumber);
+        	mv.visitMethodInsn(INVOKESTATIC, "com/utd/cs6367/CoverageStorage", "addToCoverageList", "(Ljava/lang/String;)V", false);
     	}
+    	
     	super.visitLineNumber(line, start);
     }
     
-    // statement coverage collection
     @Override
     public void visitLabel(Label label){
-    	if(line != 0) {
-    		mv.visitLdcInsn(className + ":" + line);
-        	mv.visitMethodInsn(INVOKESTATIC, "com/utd/cs6367/CoverageStorage", "addToCovLst", "(Ljava/lang/String;)V", false);
+    	if(lineNumber != 0) {
+    		mv.visitLdcInsn(className + ":" + lineNumber);
+        	mv.visitMethodInsn(INVOKESTATIC, "com/utd/cs6367/CoverageStorage", "addToCoverageList", "(Ljava/lang/String;)V", false);
     	}
+    	
     	super.visitLabel(label);
     }
 }
