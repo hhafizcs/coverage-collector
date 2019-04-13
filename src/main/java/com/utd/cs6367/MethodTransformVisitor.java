@@ -18,8 +18,9 @@ class MethodTransformVisitor extends MethodVisitor implements Opcodes {
     	lineNumber = line;
     	
     	if(lineNumber != 0) {
-        	mv.visitLdcInsn(className + ":" + lineNumber);
-        	mv.visitMethodInsn(INVOKESTATIC, "com/utd/cs6367/CoverageStorage", "addToCoverageList", "(Ljava/lang/String;)V", false);
+        	mv.visitLdcInsn(className);
+        	mv.visitLdcInsn(lineNumber);
+        	mv.visitMethodInsn(INVOKESTATIC, "com/utd/cs6367/CoverageStorage", "addLineToStmtCovList", "(Ljava/lang/String;I)V", false);
     	}
     	
     	super.visitLineNumber(line, start);
@@ -28,8 +29,9 @@ class MethodTransformVisitor extends MethodVisitor implements Opcodes {
     @Override
     public void visitLabel(Label label){
     	if(lineNumber != 0) {
-    		mv.visitLdcInsn(className + ":" + lineNumber);
-        	mv.visitMethodInsn(INVOKESTATIC, "com/utd/cs6367/CoverageStorage", "addToCoverageList", "(Ljava/lang/String;)V", false);
+    		mv.visitLdcInsn(className);
+        	mv.visitLdcInsn(lineNumber);
+        	mv.visitMethodInsn(INVOKESTATIC, "com/utd/cs6367/CoverageStorage", "addLineToStmtCovList", "(Ljava/lang/String;I)V", false);
     	}
     	
     	super.visitLabel(label);
