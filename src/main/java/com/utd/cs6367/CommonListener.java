@@ -13,5 +13,6 @@ public class CommonListener extends RunListener {
 	
 	public void testRunFinished(Result result) {
 		CoverageStorage.writeStmtCovToFile("stmt-cov.txt");
+		CoverageStorage.writeVarCovToFile("var-cov.txt");
     }
 }

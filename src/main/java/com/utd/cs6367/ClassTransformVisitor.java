@@ -19,7 +19,7 @@ class ClassTransformVisitor extends ClassVisitor implements Opcodes {
         if(mv == null) {
         	return null;
         } else {
-        	return new MethodTransformVisitor(mv, className);
+        	return new MethodTransformVisitor(mv, className, access, desc, name);
         }
     }
 }

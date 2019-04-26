@@ -3,6 +3,10 @@
   <groupId>com.utd.cs6367</groupId>
   <artifactId>coverage-collector</artifactId>
   <version>1</version>
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
   <dependencies>
   	<!-- https://mvnrepository.com/artifact/org.ow2.asm/asm -->
 	<dependency>
