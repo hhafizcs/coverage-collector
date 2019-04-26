@@ -18,6 +18,10 @@ public class CoverageStorage {
 	//private static String varToRemove;
 	
 	private CoverageStorage() {}
+	
+	public static HashMap<String, ArrayList<Object>> getVarCovList() {
+		return varCovList;
+	}
     
     public static void addTestToStmtCovList(String testName) {
     	currentTestName = testName;
